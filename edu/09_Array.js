@@ -177,7 +177,7 @@ console.log(arr, resultArr);  // [ 1, 2, 3 ] [ 4, 5 ]
 */
 
 //  2. start와 count를 전달했을 경우      
-      // - 해당 인덱스 요수부터 start 수 만큼의 요소를 제거하고,
+      // - 해당 인덱스 요소부터 count 수 만큼의 요소를 제거하고,
       //   제거한 요소들을 배열로 반환
 
 arr = [1, 2, 3, 4, 5];
@@ -185,7 +185,7 @@ resultArr = arr.splice(2, 2);
 console.log(arr, resultArr);  // [ 1, 2, 5 ] [ 3, 4 ]
 
 //  3. start와 count와 args를 전달했을 경우      
-      // - 해당 인덱스 요수부터 start 수 만큼의 요소를 제거하고,
+      // - 해당 인덱스 요소부터 count 수 만큼의 요소를 제거하고,
       //   해당 위치에 args를 삽입하고, 제거한 요소들을 배열로 반환
 arr = [1, 2, 3, 4, 5];
 resultArr = arr.splice(2, 1, [100, 200, 300]);
@@ -200,3 +200,122 @@ arr = [1, 2, 3, 4, 5];
 resultArr = arr.join();
 console.log(arr, resultArr);  // [ 1, 2, 3, 4, 5 ] 1,2,3,4,5
 console.log(typeof arr, typeof resultArr);  // object string
+
+
+// Array.sort(): T[] ** 원본 변경 **
+//  배열의 요소를 문자열로 변환 후, 오름차순 정렬을 하고 정렬한 배열을 반환
+/*
+arr = [6, 4, 7, 1, 11];
+resultArr = arr.sort(); // 문자로 정렬
+console.log(arr, resultArr);  // [ 1, 11, 4, 6, 7 ] [ 1, 11, 4, 6, 7 ]
+*/
+arr = [6, 4, 7, 1, 11];
+//  (a - b)가 양수일 경우, a가 큰수, b가 작은수로 인식하여 정렬
+//  (a - b)가 음수일 경우, a가 작은수, b가 큰수로 인식하여 정렬
+//  (a - b)가 0일 경우, 같은 값으로 인식하여 정렬
+resultArr = arr.sort((a, b) => a - b);
+console.log(arr, resultArr);  // [ 1, 4, 6, 7, 11 ] [ 1, 4, 6, 7, 11 ]
+
+
+// Array.map(callback): T[]
+//  배열의 모든 요소에 대해 콜백 함수를 반복 실행한 후,
+//  콜백 함수의 리턴 값들을 모아서 새로운 배열을 반환
+arr = [1, 2, 3, 4, 5, 6];
+resultArr = arr.map(val => {
+  if(val % 3 === 0) {
+    return '짝';
+  } else {
+    return val;
+  }
+});
+console.log(arr, resultArr);
+// [ 1, 2, 3, 4, 5, 6 ] [ 1, 2, '짝', 4, 5, '짝' ]
+
+
+// map의 작동원리
+/*
+class MyArr {
+  arr = [1, 2, 3, 4, 5, 6];
+
+  map(cb)  {
+    // 새로운 배열
+    const newArr = [];
+
+    for(let i = 0; i this.arr.length; i++) {
+      newArr.push(cb(this.arr[i]));
+    }
+    return newArr;
+  }
+}
+*/
+
+
+// Array.some(): boolean
+//  배열의 모든 요소에 대해 콜백함수를 실행한 후,
+//  조건에 맞는 결과가 하나라도 있으면 true, 없으면 false를 반환
+arr = [1, 2, 3, 4, 5, 6];
+resultArr = arr.some(val => val === 100);
+console.log(arr, resultArr);  // [ 1, 2, 3, 4, 5, 6 ] false
+
+arr = [
+  { name: '홍길동', age: 20 },
+  { name: '둘리', age: 50 },
+  { name: '또치', age: 45 }
+];
+resultArr = arr.some(item => item.age >= 40);
+console.log(arr, resultArr);
+// [
+//   { name: '홍길동', age: 20 },
+//   { name: '둘리', age: 50 },
+//   { name: '또치', age: 45 }
+// ] true
+
+
+// Array.every(callback): boolean
+//  배열의 모든 요소에 대해 콜백함수를 실행한 후,
+//  모두 조건에 맞으면 true, 없으면 false를 반환
+arr = [
+  { name: '홍길동', age: 20 },
+  { name: '둘리', age: 50 },
+  { name: '또치', age: 45 }
+];
+resultArr = arr.every(item => item.age >= 20);
+console.log(arr, resultArr);
+// [
+//   { name: '홍길동', age: 20 },
+//   { name: '둘리', age: 50 },
+//   { name: '또치', age: 45 }
+// ] true
+
+
+// Array.filter(callback): T[]
+//  배열의 모든 요소에 대해 콜백함수를 실행한 후,
+//  조건에 만족한 요소만 모아서 새로운 배열로 반환
+arr = [
+  { name: '홍길동', age: 20 },
+  { name: '둘리', age: 50 },
+  { name: '또치', age: 45 }
+];
+resultArr = arr.filter(item => item.age < 50);
+console.log(arr, resultArr);
+// [
+//   { name: '홍길동', age: 20 },
+//   { name: '둘리', age: 50 },
+//   { name: '또치', age: 45 }
+// ] [ { name: '홍길동', age: 20 }, { name: '또치', age: 45 } ]
+
+
+// Array.forEach(callback): void
+//  배열의 모든 요소에 대해 콜백함수를 반복 실행하고 싶을때 사용
+arr = [
+  { name: '홍길동', age: 20 },
+  { name: '둘리', age: 50 },
+  { name: '또치', age: 45 }
+];
+arr.forEach((val, idx) => {
+  // 내가 하고 싶은 처리 
+  console.log(val, idx, val.name);
+});
+// { name: '홍길동', age: 20 } 0 홍길동
+// { name: '둘리', age: 50 } 1 둘리
+// { name: '또치', age: 45 } 2 또치
