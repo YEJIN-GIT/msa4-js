@@ -1,0 +1,21 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  position: absolute;
+  /* background-color: #318df7;  TODO: 테스트 시작시 지우기 하기 */
+  padding: 15px;  
+}
+
+.box {
+  /* background-color: bisque;  TODO: 테스트 시작시 지우기 하기 */
+  width: 100px;
+  height: 100px;
+}
+
+.busted {
+  background-color: cadetblue;
+}
