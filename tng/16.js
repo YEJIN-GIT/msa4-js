@@ -5,8 +5,8 @@ findDiv.style.backgroundColor= 'transparent';
 
 // 랜덤 위치 이동
 function gogo() {  
-  let x = Math.random() * (window.innerWidth - 300);
-  let y = Math.random() * (window.innerHeight - 300);
+  let x = Math.random() * (window.innerWidth - 100);
+  let y = Math.random() * (window.innerHeight - 100);
   // console.log(x, y);
   // console.log(Math.floor(x), Math.floor(y));
   
